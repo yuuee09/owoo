@@ -1,1 +1,429 @@
-# owoo
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Birthday Wishes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: #f9a8d4;
+            font-size: 20px;
+            animation: float 6s infinite ease-in-out;
+            opacity: 0.6;
+        }
+        
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .heart:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .heart:nth-child(4) { left: 80%; animation-delay: 3s; }
+        .heart:nth-child(5) { left: 90%; animation-delay: 4s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            50% { transform: translateY(-10vh) rotate(180deg); opacity: 1; }
+        }
+        
+        .card-container {
+            position: relative;
+            z-index: 10;
+            perspective: 1000px;
+        }
+        
+        .birthday-card {
+            width: 400px;
+            height: 550px;
+            background: linear-gradient(145deg, #ffffff 0%, #fdf2f8 100%);
+            border-radius: 25px;
+            box-shadow: 
+                0 20px 40px rgba(236, 72, 153, 0.15),
+                0 0 0 1px rgba(236, 72, 153, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .birthday-card:hover {
+            transform: rotateY(5deg) rotateX(2deg) scale(1.02);
+        }
+        
+        .card-border {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid #f9a8d4;
+            border-radius: 20px;
+            opacity: 0.3;
+        }
+        
+        .bow-decoration {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 40px;
+            z-index: 5;
+        }
+        
+        .bow {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #f9a8d4, #ec4899);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+            animation: bowPulse 3s infinite ease-in-out;
+        }
+        
+        .bow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 30px;
+            background: linear-gradient(145deg, #ec4899, #be185d);
+            border-radius: 50%;
+        }
+        
+        .bow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 35px;
+            background: linear-gradient(to bottom, #be185d, #831843);
+            border-radius: 4px;
+        }
+        
+        @keyframes bowPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .cherry-decoration {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            animation: cherryFloat 4s infinite ease-in-out;
+        }
+        
+        @keyframes cherryFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+            50% { transform: translateX(-50%) translateY(-10px) rotate(5deg); }
+        }
+        
+        .main-message {
+            text-align: center;
+            padding: 140px 30px 30px;
+        }
+        
+        .happy-birthday {
+            font-family: 'Dancing Script', cursive;
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ec4899, #be185d, #831843);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: textShimmer 3s infinite ease-in-out;
+        }
+        
+        @keyframes textShimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+        
+        .birthday-text {
+            font-size: 18px;
+            color: #831843;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .decorative-line {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ec4899, transparent);
+            margin: 20px auto;
+            position: relative;
+        }
+        
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '♡';
+            position: absolute;
+            top: -8px;
+            color: #ec4899;
+            font-size: 16px;
+        }
+        
+        .decorative-line::before { left: -15px; }
+        .decorative-line::after { right: -15px; }
+        
+        .wish-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: #be185d;
+            font-weight: 600;
+            font-style: italic;
+        }
+        
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .sparkle {
+            position: absolute;
+            color: #fde047;
+            font-size: 12px;
+            animation: sparkle 2s infinite ease-in-out;
+        }
+        
+        .sparkle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 30%; right: 25%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { bottom: 25%; right: 20%; animation-delay: 1.5s; }
+        .sparkle:nth-child(5) { top: 60%; left: 10%; animation-delay: 2s; }
+        .sparkle:nth-child(6) { top: 70%; right: 15%; animation-delay: 2.5s; }
+        
+        @keyframes sparkle {
+            0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1) rotate(180deg); opacity: 1; }
+        }
+        
+        .ribbon {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 30px;
+            background: linear-gradient(145deg, #f9a8d4, #ec4899);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .ribbon::before,
+        .ribbon::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        
+        .ribbon::before {
+            left: 0;
+            border-width: 15px 0 0 20px;
+            border-color: transparent transparent transparent #be185d;
+        }
+        
+        .ribbon::after {
+            right: 0;
+            border-width: 15px 20px 0 0;
+            border-color: transparent #be185d transparent transparent;
+        }
+        
+        .click-message {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #be185d;
+            opacity: 0.7;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fde047;
+            animation: confetti 3s infinite ease-in-out;
+        }
+        
+        .confetti:nth-child(odd) { background: #ec4899; }
+        .confetti:nth-child(3n) { background: #f9a8d4; }
+        
+        @keyframes confetti {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        .birthday-card.clicked {
+            animation: celebrate 1s ease-in-out;
+        }
+        
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.05) rotate(2deg); }
+            75% { transform: scale(1.05) rotate(-2deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts">
+        <div class="heart">♡</div>
+        <div class="heart">♡</div>
+        <div class="heart">♡</div>
+        <div class="heart">♡</div>
+        <div class="heart">♡</div>
+    </div>
+    
+    <div class="card-container">
+        <div class="birthday-card" onclick="celebrateClick()">
+            <div class="card-border"></div>
+            
+            <div class="bow-decoration">
+                <div class="bow"></div>
+            </div>
+            
+            <div class="sparkles">
+                <div class="sparkle">✨</div>
+                <div class="sparkle">✨</div>
+                <div class="sparkle">✨</div>
+                <div class="sparkle">✨</div>
+                <div class="sparkle">✨</div>
+                <div class="sparkle">✨</div>
+            </div>
+            
+            <div class="cherry-decoration">🍒</div>
+            
+            <div class="main-message">
+                <h1 class="happy-birthday">Another Year Sweeter</h1>
+                <div class="decorative-line"></div>
+                <p class="birthday-text">
+                    Like cherries ripening in summer sun,<br>
+                    you bloom more beautiful with each passing season
+                </p>
+                <div class="wish-text">Here's to your most enchanting chapter yet ♡</div>
+            </div>
+            
+            <div class="ribbon">BLOOM & FLOURISH</div>
+        </div>
+        
+        <div class="click-message">Click the card for a surprise! ✨</div>
+    </div>
+
+    <script>
+        function celebrateClick() {
+            const card = document.querySelector('.birthday-card');
+            card.classList.add('clicked');
+            
+            // Create confetti explosion
+            createConfetti();
+            
+            // Remove the animation class after animation completes
+            setTimeout(() => {
+                card.classList.remove('clicked');
+            }, 1000);
+        }
+        
+        function createConfetti() {
+            const colors = ['#fde047', '#ec4899', '#f9a8d4', '#fbbf24', '#fb7185'];
+            
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.width = Math.random() * 8 + 4 + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+                confetti.style.animation = `confetti ${Math.random() * 2 + 2}s ease-in-out forwards`;
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                confetti.style.zIndex = '1000';
+                
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 4000);
+            }
+        }
+        
+        // Add some random sparkle animations
+        function addRandomSparkles() {
+            const sparkles = document.querySelectorAll('.sparkle');
+            sparkles.forEach((sparkle, index) => {
+                setInterval(() => {
+                    sparkle.style.animationDelay = Math.random() * 3 + 's';
+                }, 3000 + index * 500);
+            });
+        }
+        
+        // Initialize random sparkles
+        addRandomSparkles();
+        
+        // Add hover sound effect simulation with visual feedback
+        document.querySelector('.birthday-card').addEventListener('mouseenter', function() {
+            this.style.boxShadow = '0 25px 50px rgba(236, 72, 153, 0.25), 0 0 0 1px rgba(236, 72, 153, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9)';
+        });
+        
+        document.querySelector('.birthday-card').addEventListener('mouseleave', function() {
+            this.style.boxShadow = '0 20px 40px rgba(236, 72, 153, 0.15), 0 0 0 1px rgba(236, 72, 153, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)';
+        });
+    </script>
+</body>
+</html>
